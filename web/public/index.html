@@ -1,0 +1,25 @@
+<html ng-app="myApp" ng-controller="myCon">
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    </head>
+    <body>
+        <h1>Hello from web container</h1>
+        <h2>{{res.data.api}}</h2>
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCon',['$scope', '$window', '$http', '$timeout', function($scope, $window, $http, $timeout) {
+                $timeout(function() {
+                    console.log('posting to api');
+                    $http.get('http://localhost:4000').then(function successCb(res) {
+                        $scope.res = res;
+                        console.log(res);
+                    }, function errorCb(err) {
+                        console.log(err);
+                    });
+                }, 1000);
+            }])
+        </script>
+    </body>
+</html>
